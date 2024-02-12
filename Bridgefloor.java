@@ -1,36 +1,38 @@
 import java.awt.*;
 
 /**
- * A person that can be manipulated and that draws itself on a canvas.
+ * A square that can be manipulated and that draws itself on a canvas.
  * 
  * @author  Alexei Cichon
  * @version 2024.01.27
  */
 
-public class Person
+public class Bridgefloor
 {
     private int height;
     private int width;
+    private int size;
     private int xPosition;
     private int yPosition;
     private String color;
     private boolean isVisible;
 
     /**
-     * Create a new person at default position with default color.
+     * Create a new square at default position with default color.
      */
-    public Person()
+    public Bridgefloor()
     {
-        height = 60;
-        width = 30;
-        xPosition = 150;
-        yPosition = 210;
-        color = "black";
+        height = 20;
+        width = 80;
+        size = 20;
+        xPosition = 210;
+        yPosition = 140;
+        color = "#00FF00";
         isVisible = false;
     }
 
     /**
-     * Make this person visible. If it was already visible, do nothing.
+     * Make this square visible. If it was already visible, do nothing.
      */
     public void makeVisible()
     {
@@ -39,7 +41,7 @@ public class Person
     }
     
     /**
-     * Make this person invisible. If it was already invisible, do nothing.
+     * Make this square invisible. If it was already invisible, do nothing.
      */
     public void makeInvisible()
     {
@@ -48,7 +50,7 @@ public class Person
     }
     
     /**
-     * Move the person a few pixels to the right.
+     * Move the square a few pixels to the right.
      */
     public void moveRight()
     {
@@ -56,7 +58,7 @@ public class Person
     }
 
     /**
-     * Move the person a few pixels to the left.
+     * Move the square a few pixels to the left.
      */
     public void moveLeft()
     {
@@ -64,7 +66,7 @@ public class Person
     }
 
     /**
-     * Move the person a few pixels up.
+     * Move the square a few pixels up.
      */
     public void moveUp()
     {
@@ -72,7 +74,7 @@ public class Person
     }
 
     /**
-     * Move the person a few pixels down.
+     * Move the square a few pixels down.
      */
     public void moveDown()
     {
@@ -80,7 +82,7 @@ public class Person
     }
 
     /**
-     * Move the person horizontally by 'distance' pixels.
+     * Move the square horizontally by 'distance' pixels.
      */
     public void moveHorizontal(int distance)
     {
@@ -90,7 +92,7 @@ public class Person
     }
 
     /**
-     * Move the person vertically by 'distance' pixels.
+     * Move the square vertically by 'distance' pixels.
      */
     public void moveVertical(int distance)
     {
@@ -100,7 +102,7 @@ public class Person
     }
 
     /**
-     * Slowly move the person horizontally by 'distance' pixels.
+     * Slowly move the square horizontally by 'distance' pixels.
      */
     public void slowMoveHorizontal(int distance)
     {
@@ -124,7 +126,7 @@ public class Person
     }
 
     /**
-     * Slowly move the person vertically by 'distance' pixels.
+     * Slowly move the square vertically by 'distance' pixels.
      */
     public void slowMoveVertical(int distance)
     {
@@ -150,11 +152,10 @@ public class Person
     /**
      * Change the size to the new size (in pixels). Size must be >= 0.
      */
-    public void changeSize(int newHeight, int newWidth)
+    public void changeSize(int newSize)
     {
         erase();
-        height = newHeight;
-        width = newWidth;
+        size = newSize;
         draw();
     }
 
@@ -169,32 +170,20 @@ public class Person
     }
 
     /**
-     * Draw the person with current specifications on screen.
+     * Draw the square with current specifications on screen.
      */
     private void draw()
     {
-        int bh = (int)(height * 0.7);  // body height
-        int hh = (height - bh) / 2;  // half head height
-        int hw = width / 2;  // half width
-        int x = xPosition;
-        int y = yPosition;
         if(isVisible) {
             Canvas canvas = Canvas.getCanvas();
-            int[] xpoints = { x-3, x-hw, x-hw, x-(int)(hw*0.2)-1, x-(int)(hw*0.2)-1, x-hw, 
-                              x-hw+(int)(hw*0.4)+1, x, x+hw-(int)(hw*0.4)-1, x+hw, x+(int)(hw*0.2)+1, 
-                              x+(int)(hw*0.2)+1, x+hw, x+hw, x+3, x+(int)(hw*0.6), 
-                              x+(int)(hw*0.6), x+3, x-3, x-(int)(hw*0.6), x-(int)(hw*0.6) };
-            int[] ypoints = { y, y+(int)(bh*0.2), y+(int)(bh*0.4), y+(int)(bh*0.2), 
-                              y+(int)(bh*0.5), y+bh, y+bh, y+(int)(bh*0.65), y+bh, y+bh, 
-                              y+(int)(bh*0.5), y+(int)(bh*0.2), y+(int)(bh*0.4), y+(int)(bh*0.2), 
-                              y, y-hh+3, y-hh-3, y-hh-hh, y-hh-hh, y-hh-3, y-hh+3 };
-            canvas.draw(this, color, new Polygon(xpoints, ypoints, 21));
+            canvas.draw(this, color,
+                        new Rectangle(xPosition, yPosition, size, size));
             canvas.wait(10);
         }
     }
 
     /**
-     * Erase the person on screen.
+     * Erase the square on screen.
      */
     private void erase()
     {

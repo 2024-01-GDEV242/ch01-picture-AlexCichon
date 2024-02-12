@@ -3,12 +3,14 @@ import java.awt.*;
 /**
  * A square that can be manipulated and that draws itself on a canvas.
  * 
- * @author  Michael Kšlling and David J. Barnes
- * @version 2016.02.29
+ * @author  Alexei Cichon
+ * @version 2024.01.27
  */
 
 public class Square
 {
+    private int height;
+    private int width;
     private int size;
     private int xPosition;
     private int yPosition;
@@ -20,10 +22,12 @@ public class Square
      */
     public Square()
     {
-        size = 60;
-        xPosition = 310;
-        yPosition = 120;
-        color = "red";
+        height = 0;
+        width = 0;
+        size = 800;
+        xPosition = 120;
+        yPosition = -20;
+        color = "green";
         isVisible = false;
     }
 
